@@ -6,6 +6,13 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Order, OrderItem, OrderStatus } from "@/types"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { exportSingleOrder, ExportFormat } from "@/lib/export"
 
 const statusOrder: OrderStatus[] = [
   "pending",
@@ -95,10 +102,26 @@ export default function OrderDetailPage() {
         </Link>
 
         <div className="flex items-center justify-between mb-6">
-          <h1 className="font-heading text-2xl font-bold uppercase tracking-wider">
-            Order Details
-          </h1>
-          <span className="font-mono text-lg">{order.order_number}</span>
+          <div>
+            <h1 className="font-heading text-2xl font-bold uppercase tracking-wider">
+              Order Details
+            </h1>
+            <span className="font-mono text-lg">{order.order_number}</span>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger>Export</DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => exportSingleOrder(order, "csv")}>
+                Download CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => exportSingleOrder(order, "xlsx")}>
+                Download Excel
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => exportSingleOrder(order, "pdf")}>
+                Download PDF
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         <div className="border-b-4 border-black mb-6"></div>

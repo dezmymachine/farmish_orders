@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client"
 import { Order, OrderItem, OrderStatus } from "@/types"
 import { Button } from "@/components/ui/button"
 import { StatusUpdateModal } from "@/components/admin/StatusUpdateModal"
+import { QuoteModal } from "@/components/admin/QuoteModal"
 
 const statusOrder: OrderStatus[] = [
   "pending",
@@ -95,11 +96,18 @@ export default function AdminOrderDetailPage() {
             </h1>
             <span className="font-mono text-lg">{order.order_number}</span>
           </div>
-          <StatusUpdateModal
-            orderId={order.id}
-            currentStatus={order.status}
-            onUpdate={handleStatusUpdate}
-          />
+          <div className="flex items-center gap-3">
+            <QuoteModal
+              orderId={order.id}
+              orderItems={order.order_items || []}
+              customerEmail={order.customer_email}
+            />
+            <StatusUpdateModal
+              orderId={order.id}
+              currentStatus={order.status}
+              onUpdate={handleStatusUpdate}
+            />
+          </div>
         </div>
 
         <div className="border-b-4 border-black mb-6"></div>

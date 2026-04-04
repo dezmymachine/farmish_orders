@@ -5,7 +5,15 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Order, OrderStatus, CartItem, Product, Profile } from "@/types"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Skeleton } from "@/components/ui/skeleton"
+import { ChevronDown, Download } from "lucide-react"
+import { exportOrders } from "@/lib/export"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { CustomItemForm } from "@/components/order-form/CustomItemForm"
@@ -259,14 +267,32 @@ export default function DashboardPage() {
           <h1 className="font-heading text-2xl lg:text-3xl font-bold uppercase tracking-wider">
             My Orders
           </h1>
-          <Link href="/order">
-            <Button
-              variant="outline"
-              className="font-heading uppercase tracking-wider text-xs lg:text-sm"
-            >
-              Place New Order
-            </Button>
-          </Link>
+          <div className="flex items-center gap-3">
+            {orders.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger>Export</DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "csv")}>
+                    Download CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "xlsx")}>
+                    Download Excel
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "pdf")}>
+                    Download PDF
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            <Link href="/order">
+              <Button
+                variant="outline"
+                className="font-heading uppercase tracking-wider text-xs lg:text-sm"
+              >
+                Place New Order
+              </Button>
+            </Link>
+          </div>
         </div>
 
         <div className="border-b-4 border-black mb-6"></div>
