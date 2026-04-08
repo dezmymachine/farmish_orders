@@ -8,6 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { StatusUpdateModal } from "@/components/admin/StatusUpdateModal"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { exportOrders, ExportFormat } from "@/lib/export"
 
 const statusFilters: (OrderStatus | "ALL")[] = [
   "ALL",
@@ -156,7 +163,23 @@ export default function AdminOrdersPage() {
               </button>
             ))}
           </div>
-          <div className="md:ml-auto">
+          <div className="md:ml-auto flex items-center gap-3">
+            {filteredOrders.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger>Export</DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "csv")}>
+                    Download CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "xlsx")}>
+                    Download Excel
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportOrders(orders, "pdf")}>
+                    Download PDF
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             <Input
               type="text"
               placeholder="Search by order no. or customer..."

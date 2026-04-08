@@ -49,3 +49,20 @@ export interface Profile {
   location?: string | null;
   role: 'customer' | 'admin';
 }
+
+export interface Quote {
+  id: string;
+  order_id: string;
+  total_amount: number;
+  created_at: string;
+  quote_items?: QuoteItem[];
+}
+
+export interface QuoteItem {
+  id: string;
+  quote_id: string;
+  order_item_id: string;
+  custom_price: number;
+  quantity: number;
+  total_price: number;
+}
