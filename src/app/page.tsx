@@ -72,14 +72,14 @@ export default function Home() {
             {/* Trust strip */}
             <div className="flex items-center gap-6 mt-16">
               <div className="flex flex-col items-center">
-                <span className="font-heading font-bold text-[28px] text-[#0F0F0F]">24+</span>
+                <span className="font-heading font-bold text-[28px] text-[#0F0F0F]">50+</span>
                 <span className="font-heading font-medium text-[10px] tracking-[0.15em] text-[#9C9690] uppercase">
                   PRODUCT VARIETIES
                 </span>
               </div>
               <div className="w-px h-8 bg-[#D9D4C7]"></div>
               <div className="flex flex-col items-center">
-                <span className="font-heading font-bold text-[28px] text-[#0F0F0F]">48H</span>
+                <span className="font-heading font-bold text-[28px] text-[#0F0F0F]">4-5 days</span>
                 <span className="font-heading font-medium text-[10px] tracking-[0.15em] text-[#9C9690] uppercase">
                   QUOTE TURNAROUND
                 </span>

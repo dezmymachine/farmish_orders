@@ -51,7 +51,7 @@ export const OrderConfirmationEmail = ({
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0FDF4;border-left:3px solid #2D5016;margin-bottom:24px">
                 <tr>
                   <td style="padding:12px 16px">
-                    <p style="margin:0;font-size:13px;color:#2D5016;font-weight:500">We'll send you a quote within 24 hours.</p>
+                    <p style="margin:0;font-size:13px;color:#2D5016;font-weight:500">We'll send you a quote within 4 - 5 business days.</p>
                   </td>
                 </tr>
               </table>
