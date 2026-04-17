@@ -276,7 +276,7 @@ export default function AdminOrderDetailPage() {
                         Quote {quote.id.slice(0, 8)}
                       </span>
                       <span className="font-mono text-lg font-bold">
-                        £{quote.total_amount.toFixed(2)}
+                        £{quote.total_amount?.toFixed(2) ?? '0.00'}
                       </span>
                     </div>
                     <p className="text-xs text-[var(--color-text-muted)] mb-3">
@@ -305,8 +305,8 @@ export default function AdminOrderDetailPage() {
                             <tr key={item.id} className="border-b border-gray-200">
                               <td className="py-2 pr-4 text-sm">Item {item.order_item_id.slice(0, 8)}</td>
                               <td className="py-2 pr-4 text-sm text-right">{item.quantity}</td>
-                              <td className="py-2 pr-4 text-sm text-right">£{item.custom_price.toFixed(2)}</td>
-                              <td className="py-2 text-sm text-right">£{item.total_price.toFixed(2)}</td>
+                              <td className="py-2 pr-4 text-sm text-right">£{item.custom_price?.toFixed(2) ?? '0.00'}</td>
+                              <td className="py-2 text-sm text-right">£{item.total_price?.toFixed(2) ?? '0.00'}</td>
                             </tr>
                           ))}
                         </tbody>
