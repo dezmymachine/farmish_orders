@@ -266,54 +266,91 @@ export default function AdminOrderDetailPage() {
                 <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mt-8 mb-4 border-b border-[var(--color-border-light)] pb-2">
                   Quotes
                 </h2>
-                {quotes.map((quote) => (
-                  <div
-                    key={quote.id}
-                    className="bg-white border-2 border-black p-4 mb-4"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-heading text-sm uppercase tracking-wider">
-                        Quote {quote.id.slice(0, 8)}
-                      </span>
-                      <span className="font-mono text-lg font-bold">
-                        £{quote.total_amount?.toFixed(2) ?? '0.00'}
-                      </span>
-                    </div>
-                    <p className="text-xs text-[var(--color-text-muted)] mb-3">
-                      Created: {new Date(quote.created_at).toLocaleDateString("en-GB")}
-                    </p>
-                    {quote.quote_items && quote.quote_items.length > 0 && (
-                      <table className="w-full border-collapse">
-                        <thead>
-                          <tr className="border-b border-gray-300">
-                            <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
-                              Item
-                            </th>
-                            <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
-                              Qty
-                            </th>
-                            <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
-                              Price
-                            </th>
-                            <th className="text-right text-xs font-heading uppercase tracking-wider py-2">
-                              Total
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {quote.quote_items.map((item) => (
-                            <tr key={item.id} className="border-b border-gray-200">
-                              <td className="py-2 pr-4 text-sm">Item {item.order_item_id.slice(0, 8)}</td>
-                              <td className="py-2 pr-4 text-sm text-right">{item.quantity}</td>
-                              <td className="py-2 pr-4 text-sm text-right">£{item.custom_price?.toFixed(2) ?? '0.00'}</td>
-                              <td className="py-2 text-sm text-right">£{item.total_price?.toFixed(2) ?? '0.00'}</td>
+                {quotes.map((quote) => {
+                  const subtotal = quote.quote_items?.reduce((sum, item) => sum + (item.total_price || 0), 0) || 0
+                  const serviceFee = (quote as any).service_fee || subtotal * 0.05
+                  const transport = (quote as any).transport || 0
+                  return (
+                    <div
+                      key={quote.id}
+                      className="bg-white border-2 border-black p-4 mb-4"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-heading text-sm uppercase tracking-wider">
+                          Quote {quote.id.slice(0, 8)}
+                        </span>
+                        <span className="font-mono text-lg font-bold">
+                          GH₵{quote.total_amount?.toFixed(2) ?? '0.00'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[var(--color-text-muted)] mb-3">
+                        Created: {new Date(quote.created_at).toLocaleDateString("en-GB")}
+                      </p>
+                      <div className="overflow-x-auto">
+                      {quote.quote_items && quote.quote_items.length > 0 && (
+                        <table className="w-full border-collapse min-w-[700px]">
+                          <thead>
+                            <tr className="border-b border-gray-300">
+                              <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                                Product
+                              </th>
+                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                                Qty
+                              </th>
+                              <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                                District
+                              </th>
+                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                                Unit Price
+                              </th>
+                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2">
+                                Total
+                              </th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    )}
-                  </div>
-                ))}
+                          </thead>
+                          <tbody>
+                            {quote.quote_items.map((item) => (
+                              <tr key={item.id} className="border-b border-gray-200">
+                                <td className="py-2 pr-4 text-sm">{(item as any).product_name || 'Unknown'}</td>
+                                <td className="py-2 pr-4 text-sm text-right">{item.quantity}</td>
+                                <td className="py-2 pr-4 text-sm">{(item as any).district || '-'}</td>
+                                <td className="py-2 pr-4 text-sm text-right">GH₵{(item.unit_price ?? item.custom_price ?? 0).toFixed(2)}</td>
+                                <td className="py-2 text-sm text-right">GH₵{item.total_price?.toFixed(2) ?? '0.00'}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-wider">
+                                Subtotal
+                              </td>
+                              <td className="py-2 text-right text-sm font-bold">
+                                GH₵{subtotal.toFixed(2)}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colSpan={4} className="py-2 text-right text-sm uppercase tracking-wider text-[var(--color-text-muted)]">
+                                Service Fee (5%)
+                              </td>
+                              <td className="py-2 text-right text-sm text-[var(--color-text-secondary)]">
+                                GH₵{serviceFee.toFixed(2)}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-wider">
+                                Transport
+                              </td>
+                              <td className="py-2 text-right text-sm">
+                                GH₵{transport.toFixed(2)}
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      )}
+                      </div>
+                    </div>
+                  )
+                })}
               </>
             )}
           </div>

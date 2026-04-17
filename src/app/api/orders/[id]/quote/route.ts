@@ -31,15 +31,17 @@ export async function POST(
     }
 
     const body = await request.json()
-    const { items, notes } = body as {
+    const { items, notes, transport } = body as {
       items: Array<{
         order_item_id: string
         product_name: string
         unit: string
         quantity: number
         unit_price: number
+        district?: string | null
       }>
       notes?: string
+      transport?: number
     }
 
     if (!items || items.length === 0) {
@@ -64,16 +66,21 @@ export async function POST(
       total_price: item.quantity * item.unit_price,
     }))
 
-    const totalAmount = quoteItems.reduce((sum, item) => sum + item.total_price, 0)
+    const subtotalAmount = quoteItems.reduce((sum, item) => sum + item.total_price, 0)
+    const serviceFee = subtotalAmount * 0.05
+    const transportAmount = transport || 0
+    const totalAmount = subtotalAmount + serviceFee + transportAmount
+
+    const quoteInsertData: any = {
+      order_id: orderId,
+      created_by: user.id,
+      total_amount: totalAmount,
+      notes: notes || null,
+    }
 
     const { data: quote, error: quoteError } = await supabase
       .from("quotes")
-      .insert({
-        order_id: orderId,
-        created_by: user.id,
-        total_amount: totalAmount,
-        notes: notes || null,
-      })
+      .insert(quoteInsertData)
       .select()
       .single()
 
@@ -92,7 +99,7 @@ export async function POST(
       unit: item.unit,
       quantity: item.quantity,
       unit_price: item.unit_price,
-      total_price: item.total_price,
+      total_price: item.unit_price * item.quantity,
     }))
 
     const { error: itemsError } = await supabase
@@ -101,8 +108,9 @@ export async function POST(
 
     if (itemsError) {
       console.error("Quote items error:", itemsError)
+      console.error("Insert data:", JSON.stringify(quoteItemsWithIds))
       return NextResponse.json(
-        { error: "Failed to create quote items" },
+        { error: `Failed to create quote items: ${itemsError.message}` },
         { status: 500 }
       )
     }

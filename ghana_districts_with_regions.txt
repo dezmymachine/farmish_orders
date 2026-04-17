@@ -1,0 +1,232 @@
+ghana_districts_with_regions
+Ashanti Region
+1.1. Adansi North District (map)
+1.2. Adansi South District
+1.3. Afigya-Kwabre District
+1.4. Ahafo-Ano North District
+1.5. Ahafo-Ano South District
+1.6. Amansie Central District
+1.7. Amansie West District
+1.8. Asante-Akim Central Municipal District
+1.9. Asante-Akim North District
+1.10. Asante-Akim South District
+1.11. Asokore-Mampong Municipal District
+1.12. Atwima-Kwanwoma District
+1.13. Atwima-Mponua District
+1.14. Atwima-Nwabiagya District
+1.15. Bekwai Municipal District
+1.16. Bosome-Freho District
+1.17. Bosomtwe District
+1.18. Ejisu-Juaben Municipal District
+1.19. Ejura-Sekyedumase District
+1.20. Kumasi Metropolitan District
+1.21. Kumawu District
+1.22. Kwabre East District
+1.23. Mampong Municipal District
+1.24. Obuasi Municipal District
+1.25. Offinso Municipal District
+1.26. Offinso North District
+1.27. Sekyere-Afram Plains District (map)
+1.28. Sekyere Central District
+1.29. Sekyere East District
+1.30. Sekyere South District (map)
+Brong Ahafo Region
+2.1. Asunafo North Municipal District
+2.2. Asunafo South District
+2.3. Asutifi District
+2.4. Asutifi South District
+2.5. Atebubu-Amantin District
+2.6. Banda District
+2.7. Berekum Municipal District
+2.8. Dormaa East District
+2.9. Dormaa Municipal District
+2.10. Dormaa West District
+2.11. Jaman North District
+2.12. Jaman South District
+2.13. Kintampo North Municipal District
+2.14. Kintampo South District
+2.15. Nkoranza North District
+2.16. Nkoranza South Municipal District
+2.17. Pru District
+2.18. Sene East District
+2.19. Sene West District
+2.20. Sunyani Municipal District
+2.21. Sunyani West District
+2.22. Tain District
+2.23. Tano North District
+2.24. Tano South District
+2.25. Techiman Municipal District
+2.26. Techiman North District
+2.27. Wenchi Municipal District
+Central Region
+3.1. Abura - Asebu - Kwamankese District
+3.2. Agona East District
+3.3. Agona West Municipal District
+3.4. Ajumako-Enyan-Essiam District
+3.5. Asikuma - Odoben - Brakwa District
+3.6. Assin North Municipal District
+3.7. Assin South District
+3.8. Awutu-Senya District
+3.9. Awutu Senya East Municipal District
+3.10. Cape Coast Metropolitan District
+3.11. Effutu Municipal District
+3.12. Ekumfi District
+3.13. Gomoa East District
+3.14. Gomoa West District
+3.15. Komenda-Edina-Eguafo-Abrem Municipal District
+3.16. Mfantseman Municipal District
+3.17. Twifo Atti - Mokwa District
+3.18. Twifo Hemang - Lower Denkyira District
+3.19. Upper Denkyira East Municipal District
+3.20. Upper Denkyira West District
+Eastern Region
+4.1. Akwapim North Municipal District
+4.2. Akwapim South District
+4.3. Akyemansa District
+4.4. Asuogyaman District
+4.5. Atiwa District
+4.6. Ayensuano District
+4.7. Birim Central Municipal District
+4.8. Birim North District
+4.9. Birim South District
+4.10. Denkyembour District
+4.11. East Akim Municipal District
+4.12. Fanteakwa District
+4.13. Kwaebibirem District
+4.14. Kwahu Afram Plains North District
+4.15. Kwahu Afram Plains South District
+4.16. Kwahu East District
+4.17. Kwahu South District
+4.18. Kwahu West Municipal District
+4.19. Lower Manya Krobo Municipal District
+4.20. New Juaben Municipal District
+4.21. Nsawam - Adoagyire Municipal District
+4.22. Suhum Municipal District
+4.23. Upper Manya Krobo District
+4.24. Upper West Akim District
+4.25. West Akim Municipal District
+4.26. Yilo Krobo Municipal District
+Greater Accra Region
+5.1. Accra Metropolitan District
+5.2. Ada West District
+5.3. Ada East District
+5.4. Adenta Municipal District
+5.5. Ashaiman Municipal District
+5.6. Dangme East District
+5.7. Ga Central Municipal District
+5.8. Ga East Municipal District
+5.9. Ga South Municipal District or Weija Municipal District
+5.10. Ga West Municipal District
+5.11. Kpone - Katamanso District
+5.12. La Dade-Kotopon Municipal
+5.13. La-Nkwantanang-Madina District
+5.14. Ledzokuku-Krowor Municipal District
+5.15. Ningo - Prampam District
+5.16. Shai - Osudoku District
+5.17. Osu Klottey District
+5.18. Tema Metropolitan District
+5.19. Ayawaso East Municipal District
+Northern Region
+6.1. Bole District
+6.2. Bunkpurugu - Yunyoo District
+6.3. Central Gonja District
+6.4. Chereponi District
+6.5. East Gonja District
+6.6. East Mamprusi District
+6.7. Gushiegu District
+6.8. Karaga District
+6.9. Kpandai District
+6.10. Kumbungu District
+6.11. Mamprugo-Moaduri District
+6.12. Mion District
+6.13. Nanumba North District
+6.14. Nanumba South District
+6.15. North Gonja District
+6.16. Saboba District
+6.17. Sagnerigu District
+6.18. Savelugu-Nanton Municipal District
+6.19. Sawla-Tuna-Kalba District
+6.20. Tamale Metropolitan District
+6.21. Tatale-Sangule District
+6.22. Tolon District
+6.23. West Gonja Municipal District
+6.24. West Mamprusi District
+6.25. Yendi Municipal District
+6.26. Zabzugu District
+Upper East Region
+7.1. Bawku Municipal District
+7.2. Bawku West District
+7.3. Binduri District
+7.4. Bolgatanga Municipal District
+7.5. Bongo District
+7.6. Builsa North District
+7.7. Builsa South District
+7.8. Garu District
+7.9. Kassena Nankana Municipal District (Kassena Nankana East District)
+7.10. Kassena Nankana West District
+7.11. Nabdam District
+7.12. Pusiga District
+7.13. Talensi District
+7.14 Bolgatanga East District
+7.15 Tempane District
+Upper West Region
+8.1. Daffiama-Bussie-Issa District
+8.2. Jirapa District
+8.3. Lambussie Karni District
+8.4. Lawra District
+8.5. Nadowli-Kaleo District
+8.6. Nandom District
+8.7. Sissala East District
+8.8. Sissala West District
+8.9. Wa East District
+8.10. Wa Municipal District
+8.11. Wa West District
+Volta Region
+9.1. Adaklu District
+9.2. Afadzato South District (Afadjato District)
+9.3. Agotime-Ziope District
+9.4. Akatsi North District
+9.5. Akatsi South District
+9.6. Biakoye District
+9.7. Central Tongu District
+9.8. Ho Municipal District
+9.9. Ho West District
+9.10. Hohoe Municipal District
+9.11. Jasikan District
+9.12. Kadjebi District
+9.13. Keta Municipal District
+9.14. Ketu South Municipal District
+9.15. Ketu North District
+9.16. Kpando Municipal District
+9.17. Krachi East District
+9.18. Krachi-Nchumuru District
+9.19. Krachi West District
+9.20. Nkwanta North District
+9.21. Nkwanta South District
+9.22. North Dayi District
+9.23. North Tongu District
+9.24. South Dayi District
+9.25. South Tongu District
+Western Region
+10.1. Ahanta West District
+10.2. Aowin District
+10.3. Suaman District
+10.4. Bia District
+10.5. Bia East District
+10.6. Bibiani-Anhwiaso-Bekwai District (also called: Sefwi Bibiani-Ahwiaso-Bekwai District)
+10.7. Bodi District
+10.8. Ellembelle District
+10.9. Jomoro District
+10.10. Juaboso District
+10.11. Wassa East District
+10.12. Mpohor District
+10.13. Nzema East Municipal District
+10.14. Prestea-Honi Valley District
+10.15. Sefwi-Akontombra District
+10.16. Sefwi-Wiawso District
+10.17. Sekondi-Takoradi Metropolitan District
+10.18. Shama District
+10.19. Tarkwa Nsuaem Municipal District
+10.20. Wasa-Amenfi East District
+10.21. Wasa-Amenfi Central District
+10.22. Wasa-Amenfi West District
