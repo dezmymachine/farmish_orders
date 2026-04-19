@@ -113,6 +113,157 @@ function downloadBlob(blob: Blob, fileName: string) {
   URL.revokeObjectURL(url)
 }
 
+export function exportQuote(quote: any, format: ExportFormat) {
+  const fileName = `quote_${quote.id.slice(0, 8)}`
+
+  switch (format) {
+    case "csv":
+      exportQuoteToCSV(quote, fileName)
+      break
+    case "xlsx":
+      exportQuoteToXLSX(quote, fileName)
+      break
+    case "pdf":
+      exportQuoteToPDF(quote, fileName)
+      break
+  }
+}
+
+function exportQuoteToCSV(quote: any, fileName: string) {
+  const rows: any[][] = [
+    ["Field", "Value"],
+    ["Quote ID", quote.id.slice(0, 8)],
+    ["Date", new Date(quote.created_at).toLocaleDateString("en-GB")],
+    [],
+    ["Items"],
+    ["Product", "Quantity", "Unit", "District", "Unit Price", "Total"],
+  ]
+
+  for (const item of quote.quote_items || []) {
+    rows.push([
+      item.product_name || "Unknown",
+      item.quantity,
+      item.unit || "",
+      item.district || "",
+      `GHS ${(item.unit_price || 0).toFixed(2)}`,
+      `GHS ${(item.total_price || 0).toFixed(2)}`,
+    ])
+  }
+
+  const subtotal = (quote.quote_items || []).reduce(
+    (sum: number, item: any) => sum + (item.total_price || 0),
+    0
+  )
+  const serviceFee = quote.service_fee || subtotal * 0.05
+  const transport = quote.transport || 0
+
+  rows.push(
+    [],
+    [],
+    ["Subtotal", `GHS ${subtotal.toFixed(2)}`],
+    ["Service Fee (5%)", `GHS ${serviceFee.toFixed(2)}`],
+    ["Transport", `GHS ${transport.toFixed(2)}`],
+    ["TOTAL", `GHS ${(quote.total_amount || 0).toFixed(2)}`]
+  )
+
+  const csvContent = rows.map((row) =>
+    row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+  ).join("\n")
+  const blob = new Blob([csvContent], { type: "text/csv" })
+  downloadBlob(blob, `${fileName}.csv`)
+}
+
+function exportQuoteToXLSX(quote: any, fileName: string) {
+  const itemsData = (quote.quote_items || []).map((item: any) => ({
+    Product: item.product_name || "Unknown",
+    Quantity: item.quantity,
+    Unit: item.unit || "",
+    District: item.district || "",
+    Unit_Price: item.unit_price || 0,
+    Total_Price: item.total_price || 0,
+  }))
+
+  const summaryData = [
+    { Field: "Quote ID", Value: quote.id.slice(0, 8) },
+    { Field: "Date", Value: new Date(quote.created_at).toLocaleDateString("en-GB") },
+    { Field: "", Value: "" },
+    {
+      Field: "Subtotal",
+      Value: quote.quote_items?.reduce((s: number, i: any) => s + (i.total_price || 0), 0) || 0,
+    },
+    { Field: "Service Fee (5%)", Value: quote.service_fee || 0 },
+    { Field: "Transport", Value: quote.transport || 0 },
+    { Field: "TOTAL", Value: quote.total_amount || 0 },
+  ]
+
+  const worksheet1 = XLSX.utils.json_to_sheet(itemsData)
+  const worksheet2 = XLSX.utils.json_to_sheet(summaryData)
+
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet1, "Quote Items")
+  XLSX.utils.book_append_sheet(workbook, worksheet2, "Summary")
+
+  XLSX.writeFile(workbook, `${fileName}.xlsx`)
+}
+
+function exportQuoteToPDF(quote: any, fileName: string) {
+  const doc = new jsPDF()
+
+  doc.setFontSize(16)
+  doc.text("QUOTE", 14, 22)
+
+  doc.setFontSize(10)
+  doc.text(`Quote ID: ${quote.id.slice(0, 8)}`, 14, 32)
+  doc.text(
+    `Date: ${new Date(quote.created_at).toLocaleDateString("en-GB")}`,
+    14,
+    38
+  )
+
+  const tableData = (quote.quote_items || []).map((item: any) => [
+    item.product_name || "Unknown",
+    item.quantity.toString(),
+    item.unit || "-",
+    item.district || "-",
+    `GHS ${(item.unit_price || 0).toFixed(2)}`,
+    `GHS ${(item.total_price || 0).toFixed(2)}`,
+  ])
+
+  autoTable(doc, {
+    startY: 45,
+    head: [["Product", "Qty", "Unit", "District", "Unit Price", "Total"]],
+    body: tableData,
+    theme: "grid",
+    headStyles: { fillColor: [45, 86, 22] },
+    styles: { fontSize: 8 },
+  })
+
+  const subtotal = (quote.quote_items || []).reduce(
+    (sum: number, item: any) => sum + (item.total_price || 0),
+    0
+  )
+  const serviceFee = quote.service_fee || subtotal * 0.05
+  const transport = quote.transport || 0
+
+  const finalY = (doc as any).lastAutoTable.finalY + 10
+  doc.text(`Subtotal: GHS ${subtotal.toFixed(2)}`, 140, finalY, { align: "right" })
+  doc.text(
+    `Service Fee (5%): GHS ${serviceFee.toFixed(2)}`,
+    140,
+    finalY + 6,
+    { align: "right" }
+  )
+  doc.text(`Transport: GHS ${transport.toFixed(2)}`, 140, finalY + 12, {
+    align: "right",
+  })
+  doc.setFontSize(12)
+  doc.text(`Total: GHS ${(quote.total_amount || 0).toFixed(2)}`, 140, finalY + 20, {
+    align: "right",
+  })
+
+  doc.save(`${fileName}.pdf`)
+}
+
 export function exportSingleOrder(order: Order, format: ExportFormat) {
   const orderItems = order.order_items || []
   const fileName = `order_${order.order_number}`

@@ -16,6 +16,13 @@ import {
 } from "@/components/ui/select"
 import Link from "next/link"
 import { Toast, useToast, ToastContainer } from "@/components/ui/toast"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { exportQuote } from "@/lib/export"
 import ghanaDistricts from "@/data/ghana-districts.json"
 
 function QuotePageWithToast() {
@@ -185,7 +192,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
   }
 
   const formatCurrency = (amount: number) => {
-    return `GH₵ ${amount.toFixed(2)}`
+    return `GHS ${amount.toFixed(2)}`
   }
 
   return (
@@ -207,6 +214,22 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
             </p>
           </div>
           <div className="flex gap-3">
+            {existingQuote && (
+              <DropdownMenu>
+                <DropdownMenuTrigger>Export</DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => exportQuote(existingQuote, "csv")}>
+                    Download CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportQuote(existingQuote, "xlsx")}>
+                    Download Excel
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => exportQuote(existingQuote, "pdf")}>
+                    Download PDF
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             <Link href={`/admin/orders/${orderId}`}>
               <Button variant="outline">Cancel</Button>
             </Link>

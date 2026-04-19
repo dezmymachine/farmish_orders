@@ -4,6 +4,7 @@ interface QuoteItem {
   quantity: number
   unit_price: number
   total_price: number
+  district?: string
 }
 
 interface QuoteEmailProps {
@@ -11,7 +12,10 @@ interface QuoteEmailProps {
   orderNumber: string
   items: QuoteItem[]
   totalAmount: number
+  serviceFee?: number
+  transport?: number
   notes?: string
+  quoteId?: string
 }
 
 export function QuoteEmail({
@@ -19,31 +23,36 @@ export function QuoteEmail({
   orderNumber,
   items,
   totalAmount,
+  serviceFee = 0,
+  transport = 0,
   notes,
+  quoteId,
 }: QuoteEmailProps): string {
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-GH", {
-      style: "currency",
-      currency: "GHS",
-    }).format(amount)
+    return `GHS ${amount.toFixed(2)}`
   }
+
+  const subtotal = items.reduce((sum, item) => sum + item.total_price, 0)
 
   const rows = items
     .map((item) => {
       return (
         "<tr>" +
-        '<td style="padding:12px 0;border-bottom:1px solid #E5E7EB;font-size:14px;color:#111827">' +
+        '<td style="padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;color:#111827">' +
         item.product_name +
         "</td>" +
-        '<td style="padding:12px 0;border-bottom:1px solid #E5E7EB;font-size:14px;color:#111827;text-align:center">' +
+        '<td style="padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;color:#111827;text-align:center">' +
         item.quantity +
         " " +
         item.unit +
         "</td>" +
-        '<td style="padding:12px 0;border-bottom:1px solid #E5E7EB;font-size:14px;color:#111827;text-align:right">' +
+        '<td style="padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;color:#111827;text-align:center">' +
+        (item.district || "-") +
+        "</td>" +
+        '<td style="padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;color:#111827;text-align:right">' +
         formatCurrency(item.unit_price) +
         "</td>" +
-        '<td style="padding:12px 0;border-bottom:1px solid #E5E7EB;font-size:14px;color:#111827;text-align:right;font-weight:600">' +
+        '<td style="padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;color:#111827;text-align:right;font-weight:600">' +
         formatCurrency(item.total_price) +
         "</td>" +
         "</tr>"
@@ -65,7 +74,7 @@ export function QuoteEmail({
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F7F5F0">' +
     "<tr>" +
     '<td align="center" style="padding:40px 16px">' +
-    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#FFFFFF">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:650px;background:#FFFFFF">' +
     "<tr>" +
     '<td style="padding:32px 32px 24px;text-align:center">' +
     '<p style="margin:0;font-size:18px;font-weight:700;letter-spacing:0.15em;color:#2D5016;text-transform:uppercase">Farmish</p>' +
@@ -86,13 +95,32 @@ export function QuoteEmail({
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">' +
     "<tr>" +
     '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:left;border-bottom:2px solid #E5E7EB">Product</th>' +
-    '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:center;border-bottom:2px solid #E5E7EB;width:100px">Qty</th>' +
+    '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:center;border-bottom:2px solid #E5E7EB;width:70px">Qty</th>' +
+    '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:center;border-bottom:2px solid #E5E7EB;width:120px">District</th>' +
     '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:right;border-bottom:2px solid #E5E7EB;width:80px">Unit Price</th>' +
-    '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:right;border-bottom:2px solid #E5E7EB;width:100px">Total</th>' +
+    '<th style="padding:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6B7280;text-transform:uppercase;text-align:right;border-bottom:2px solid #E5E7EB;width:90px">Total</th>' +
     "</tr>" +
     rows +
     "<tr>" +
-    '<td colspan="3" style="padding:16px 0;font-size:14px;font-weight:600;color:#111827;text-align:right">Total Amount</td>' +
+    '<td colspan="4" style="padding:12px 0;font-size:13px;color:#6B7280;text-align:right">Subtotal</td>' +
+    '<td style="padding:12px 0;font-size:13px;color:#111827;text-align:right">' +
+    formatCurrency(subtotal) +
+    "</td>" +
+    "</tr>" +
+    "<tr>" +
+    '<td colspan="4" style="padding:8px 0;font-size:13px;color:#6B7280;text-align:right">Service Fee (5%)</td>' +
+    '<td style="padding:8px 0;font-size:13px;color:#111827;text-align:right">' +
+    formatCurrency(serviceFee) +
+    "</td>" +
+    "</tr>" +
+    "<tr>" +
+    '<td colspan="4" style="padding:8px 0;font-size:13px;color:#6B7280;text-align:right">Transport</td>' +
+    '<td style="padding:8px 0;font-size:13px;color:#111827;text-align:right">' +
+    formatCurrency(transport) +
+    "</td>" +
+    "</tr>" +
+    "<tr>" +
+    '<td colspan="4" style="padding:16px 0;font-size:14px;font-weight:600;color:#111827;text-align:right">Total Amount</td>' +
     '<td style="padding:16px 0;font-size:16px;font-weight:700;color:#2D5016;text-align:right">' +
     formatCurrency(totalAmount) +
     "</td>" +

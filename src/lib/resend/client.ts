@@ -4,14 +4,21 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
+interface EmailAttachment {
+  filename: string;
+  content: string;
+}
+
 export async function sendEmail({
   to,
   subject,
   html,
+  attachments,
 }: {
   to: string;
   subject: string;
   html: string;
+  attachments?: EmailAttachment[];
 }) {
   if (!resend) {
     console.warn('Resend not configured');
@@ -24,6 +31,10 @@ export async function sendEmail({
       to,
       subject,
       html,
+      attachments: attachments?.map(att => ({
+        filename: att.filename,
+        content: att.content,
+      })),
     });
 
     return { success: true, data: result };

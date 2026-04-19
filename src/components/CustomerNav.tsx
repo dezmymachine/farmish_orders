@@ -62,6 +62,13 @@ export function CustomerNav({ userEmail }: CustomerNavProps) {
           >
             My Orders
           </Link>
+          <Link
+            href="/dashboard/quotes"
+            onClick={() => setOpen(false)}
+            className="block px-6 py-3 text-sm font-heading uppercase tracking-wider hover:bg-gray-800 transition-colors"
+          >
+            My Quotes
+          </Link>
         </nav>
 
         <div className="p-4 border-t border-gray-800">

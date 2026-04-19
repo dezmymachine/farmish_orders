@@ -280,7 +280,7 @@ export default function AdminOrderDetailPage() {
                           Quote {quote.id.slice(0, 8)}
                         </span>
                         <span className="font-mono text-lg font-bold">
-                          GH₵{quote.total_amount?.toFixed(2) ?? '0.00'}
+                          GHS{quote.total_amount?.toFixed(2) ?? '0.00'}
                         </span>
                       </div>
                       <p className="text-xs text-[var(--color-text-muted)] mb-3">
@@ -314,8 +314,8 @@ export default function AdminOrderDetailPage() {
                                 <td className="py-2 pr-4 text-sm">{(item as any).product_name || 'Unknown'}</td>
                                 <td className="py-2 pr-4 text-sm text-right">{item.quantity}</td>
                                 <td className="py-2 pr-4 text-sm">{(item as any).district || '-'}</td>
-                                <td className="py-2 pr-4 text-sm text-right">GH₵{(item.unit_price ?? item.custom_price ?? 0).toFixed(2)}</td>
-                                <td className="py-2 text-sm text-right">GH₵{item.total_price?.toFixed(2) ?? '0.00'}</td>
+                                <td className="py-2 pr-4 text-sm text-right">GHS{(item.unit_price ?? item.custom_price ?? 0).toFixed(2)}</td>
+                                <td className="py-2 text-sm text-right">GHS{item.total_price?.toFixed(2) ?? '0.00'}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -325,7 +325,7 @@ export default function AdminOrderDetailPage() {
                                 Subtotal
                               </td>
                               <td className="py-2 text-right text-sm font-bold">
-                                GH₵{subtotal.toFixed(2)}
+                                GHS{subtotal.toFixed(2)}
                               </td>
                             </tr>
                             <tr>
@@ -333,7 +333,7 @@ export default function AdminOrderDetailPage() {
                                 Service Fee (5%)
                               </td>
                               <td className="py-2 text-right text-sm text-[var(--color-text-secondary)]">
-                                GH₵{serviceFee.toFixed(2)}
+                                GHS{serviceFee.toFixed(2)}
                               </td>
                             </tr>
                             <tr>
@@ -341,7 +341,7 @@ export default function AdminOrderDetailPage() {
                                 Transport
                               </td>
                               <td className="py-2 text-right text-sm">
-                                GH₵{transport.toFixed(2)}
+                                GHS{transport.toFixed(2)}
                               </td>
                             </tr>
                           </tfoot>
