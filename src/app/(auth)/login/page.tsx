@@ -22,10 +22,14 @@ export default function LoginPage() {
     setError("")
     setLoading(true)
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    const { error } = await supabase.auth
+      .signInWithPassword({
+        email,
+        password,
+      })
+      .catch(() => ({
+        error: new Error("Unable to reach the authentication service. Please try again shortly."),
+      }))
 
     if (error) {
       setError(error.message)

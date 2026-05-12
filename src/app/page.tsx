@@ -100,6 +100,7 @@ export default function Home() {
               src="/group_farmers.jpg"
               alt="Group of Ghanaian farmers with fresh produce"
               fill
+              sizes="(min-width: 768px) 50vw, 0px"
               className="object-cover"
               style={{ objectPosition: "center top" }}
               priority
@@ -117,6 +118,7 @@ export default function Home() {
               src="/group_farmers.jpg"
               alt="Group of Ghanaian farmers with fresh produce"
               fill
+              sizes="(max-width: 767px) 100vw, 0px"
               className="object-cover"
               style={{ objectPosition: "center top" }}
               priority
