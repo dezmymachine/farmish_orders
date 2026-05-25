@@ -7,6 +7,10 @@ import { Order } from "@/types"
 
 export type ExportFormat = "csv" | "xlsx" | "pdf"
 
+function safeFileName(value: string) {
+  return value.replace(/[^a-z0-9_-]+/gi, "_").replace(/^_+|_+$/g, "")
+}
+
 export function exportOrders(orders: Order[], format: ExportFormat) {
   const summaryData = orders.map((order) => ({
     "Order No.": order.order_number,
@@ -266,7 +270,7 @@ function exportQuoteToPDF(quote: any, fileName: string) {
 
 export function exportSingleOrder(order: Order, format: ExportFormat) {
   const orderItems = order.order_items || []
-  const fileName = `order_${order.order_number}`
+  const fileName = `order_${safeFileName(order.order_number)}`
 
   switch (format) {
     case "csv":

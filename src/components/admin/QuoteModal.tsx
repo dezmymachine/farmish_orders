@@ -47,7 +47,7 @@ export function QuoteModal({
   if (loading) {
     return (
       <Button
-        className="font-heading uppercase tracking-wider text-xs"
+        className="font-heading uppercase tracking-tight text-xs"
         disabled
       >
         Loading...
@@ -58,7 +58,7 @@ export function QuoteModal({
   return (
     <Button
       onClick={handleClick}
-      className="font-heading uppercase tracking-wider text-xs"
+      className="font-heading uppercase tracking-tight text-xs"
     >
       {existingQuote ? "View/Edit Quote" : "Create Quote"}
     </Button>

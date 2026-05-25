@@ -94,7 +94,7 @@ export default function AdminOrdersPage() {
   }
 
   const getStatusBadgeClass = (status: OrderStatus) => {
-    const base = "font-heading text-xs uppercase tracking-wider px-2 py-1"
+    const base = "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold"
     switch (status) {
       case "pending":
         return `${base} bg-[var(--color-amber-light)] text-[var(--color-amber)]`
@@ -120,9 +120,9 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-60px)] bg-[var(--color-bg)] p-6">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="font-heading text-2xl font-bold uppercase tracking-wider mb-6">
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-[1180px]">
+        <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)] mb-6">
           Admin Dashboard
         </h1>
 
@@ -135,9 +135,9 @@ export default function AdminOrdersPage() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="bg-[var(--color-surface)] border border-[var(--color-border-light)] p-4"
+              className="rounded-[20px] bg-white border border-[var(--color-field-border)] p-4 shadow-[var(--shadow-sm)]"
             >
-              <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+              <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)] mb-1">
                 {stat.label}
               </p>
               <p className="font-heading text-3xl font-bold">{stat.value}</p>
@@ -145,7 +145,7 @@ export default function AdminOrdersPage() {
           ))}
         </div>
 
-        <div className="border-b-4 border-black mb-6"></div>
+        <div className="border-b border-[var(--color-field-border)] mb-6"></div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="flex flex-wrap gap-1">
@@ -153,10 +153,10 @@ export default function AdminOrdersPage() {
               <button
                 key={status}
                 onClick={() => setStatusFilter(status)}
-                className={`px-3 py-1 font-heading text-xs uppercase tracking-wider transition-colors ${
+                className={`px-3 py-1 text-xs font-bold uppercase tracking-tight transition-colors ${
                   statusFilter === status
                     ? "bg-black text-white"
-                    : "bg-[var(--color-surface)] border border-[var(--color-border-light)] hover:bg-[var(--color-bg)]"
+                    : "bg-[var(--color-surface)] border border-[var(--color-field-border)] hover:bg-white"
                 }`}
               >
                 {status === "ALL" ? "All" : status.replace(/_/g, " ")}
@@ -203,32 +203,32 @@ export default function AdminOrdersPage() {
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-[20px] border border-[var(--color-field-border)] bg-white shadow-[var(--shadow-sm)]">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                <tr className="border-b border-[var(--color-field-border)] bg-[var(--color-fresh-mist)]">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Order No.
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Customer
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Email
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Phone
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Date
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Items
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Status
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3">
                     Actions
                   </th>
                 </tr>
@@ -237,7 +237,7 @@ export default function AdminOrdersPage() {
                 {filteredOrders.map((order) => (
                   <tr
                     key={order.id}
-                    className="border-b border-[var(--color-border-light)]"
+                    className="border-b border-[var(--color-field-border)]"
                   >
                     <td className="py-3 pr-4">
                       <Link
@@ -263,7 +263,7 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="py-3">
                       <Link href={`/admin/orders/${order.id}`}>
-                        <Button variant="link" size="sm" className="p-0 font-heading uppercase tracking-wider text-xs">
+                        <Button variant="link" size="sm" className="p-0 font-heading uppercase tracking-tight text-xs">
                           View
                         </Button>
                       </Link>

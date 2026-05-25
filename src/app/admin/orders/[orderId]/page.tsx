@@ -82,19 +82,19 @@ export default function AdminOrderDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-60px)] bg-[var(--color-bg)] p-6">
-        <div className="max-w-4xl mx-auto">Loading...</div>
+      <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+        <div className="mx-auto max-w-5xl">Loading...</div>
       </div>
     )
   }
 
   if (!order) {
     return (
-      <div className="min-h-[calc(100vh-60px)] bg-[var(--color-bg)] p-6">
+      <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
         <div className="max-w-4xl mx-auto text-center">
           <p>Order not found</p>
           <Link href="/admin">
-            <Button variant="link" className="font-heading uppercase tracking-wider">
+            <Button variant="link" className="font-heading uppercase tracking-tight">
               Back to Dashboard
             </Button>
           </Link>
@@ -106,18 +106,18 @@ export default function AdminOrderDetailPage() {
   const currentStatusIndex = statusOrder.indexOf(order.status)
 
   return (
-    <div className="min-h-[calc(100vh-60px)] bg-[var(--color-bg)] p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-5xl">
         <Link
           href="/admin"
-          className="inline-block mb-4 font-heading text-sm uppercase tracking-wider text-[var(--color-accent)] hover:underline"
+          className="inline-block mb-4 font-heading text-sm uppercase tracking-tight text-[var(--color-accent)] hover:underline"
         >
           ← Back to Orders
         </Link>
 
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="font-heading text-2xl font-bold uppercase tracking-wider">
+            <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)]">
               Order Details
             </h1>
             <span className="font-mono text-lg">{order.order_number}</span>
@@ -150,47 +150,47 @@ export default function AdminOrderDetailPage() {
           </div>
         </div>
 
-        <div className="border-b-4 border-black mb-6"></div>
+        <div className="border-b border-[var(--color-field-border)] mb-6"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mb-4 border-b border-[var(--color-border-light)] pb-2">
+            <h2 className="text-lg font-semibold text-[var(--color-deep-leaf)] mb-4 border-b border-[var(--color-field-border)] pb-2">
               Customer Information
             </h2>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)]">
                   Name
                 </p>
                 <p>{order.customer_name}</p>
               </div>
               <div>
-                <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)]">
                   Email
                 </p>
                 <p>{order.customer_email}</p>
               </div>
               <div>
-                <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)]">
                   Phone
                 </p>
                 <p>{order.customer_phone || "N/A"}</p>
               </div>
             </div>
 
-            <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mt-8 mb-4 border-b border-[var(--color-border-light)] pb-2">
+            <h2 className="text-lg font-semibold text-[var(--color-deep-leaf)] mt-8 mb-4 border-b border-[var(--color-field-border)] pb-2">
               Delivery Information
             </h2>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)]">
                   Address
                 </p>
                 <p>{order.delivery_address}</p>
               </div>
               {order.delivery_notes && (
                 <div>
-                  <p className="font-heading text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                  <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-muted)]">
                     Notes
                   </p>
                   <p>{order.delivery_notes}</p>
@@ -200,26 +200,26 @@ export default function AdminOrderDetailPage() {
           </div>
 
           <div>
-            <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mb-4 border-b border-[var(--color-border-light)] pb-2">
+            <h2 className="text-lg font-semibold text-[var(--color-deep-leaf)] mb-4 border-b border-[var(--color-field-border)] pb-2">
               Order Items
             </h2>
             <table className="w-full border-collapse mb-8">
               <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-2 pr-4">
+                <tr className="border-b border-[var(--color-field-border)] bg-[var(--color-fresh-mist)]">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-2 pr-4">
                     Product
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-2 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-2 pr-4">
                     Quantity
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-2">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-2">
                     Unit
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {order.order_items?.map((item: OrderItem) => (
-                  <tr key={item.id} className="border-b border-[var(--color-border-light)]">
+                  <tr key={item.id} className="border-b border-[var(--color-field-border)]">
                     <td className="py-3 pr-4 text-sm">{item.product_name}</td>
                     <td className="py-3 pr-4 text-sm text-right">{item.quantity}</td>
                     <td className="py-3 text-sm text-right">{item.unit}</td>
@@ -228,7 +228,7 @@ export default function AdminOrderDetailPage() {
               </tbody>
             </table>
 
-            <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mb-4 border-b border-[var(--color-border-light)] pb-2">
+            <h2 className="text-lg font-semibold text-[var(--color-deep-leaf)] mb-4 border-b border-[var(--color-field-border)] pb-2">
               Order Status
             </h2>
             <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function AdminOrderDetailPage() {
                       }`}
                     />
                     <div>
-                      <p className="font-heading text-sm uppercase tracking-wider">
+                      <p className="font-heading text-sm uppercase tracking-tight">
                         {status.replace(/_/g, " ")}
                       </p>
                     </div>
@@ -263,7 +263,7 @@ export default function AdminOrderDetailPage() {
 
             {quotes.length > 0 && (
               <>
-                <h2 className="font-heading text-lg font-semibold uppercase tracking-wider mt-8 mb-4 border-b border-[var(--color-border-light)] pb-2">
+                <h2 className="text-lg font-semibold text-[var(--color-deep-leaf)] mt-8 mb-4 border-b border-[var(--color-field-border)] pb-2">
                   Quotes
                 </h2>
                 {quotes.map((quote) => {
@@ -273,10 +273,10 @@ export default function AdminOrderDetailPage() {
                   return (
                     <div
                       key={quote.id}
-                      className="bg-white border-2 border-black p-4 mb-4"
+                      className="mb-4 rounded-[24px] border border-[var(--color-field-border)] bg-white p-5 shadow-[var(--shadow-sm)]"
                     >
                       <div className="flex items-center justify-between mb-3">
-                        <span className="font-heading text-sm uppercase tracking-wider">
+                        <span className="font-heading text-sm uppercase tracking-tight">
                           Quote {quote.id.slice(0, 8)}
                         </span>
                         <span className="font-mono text-lg font-bold">
@@ -286,24 +286,24 @@ export default function AdminOrderDetailPage() {
                       <p className="text-xs text-[var(--color-text-muted)] mb-3">
                         Created: {new Date(quote.created_at).toLocaleDateString("en-GB")}
                       </p>
-                      <div className="overflow-x-auto">
+                      <div className="overflow-x-auto rounded-[20px] border border-[var(--color-field-border)] bg-white shadow-[var(--shadow-sm)]">
                       {quote.quote_items && quote.quote_items.length > 0 && (
                         <table className="w-full border-collapse min-w-[700px]">
                           <thead>
                             <tr className="border-b border-gray-300">
-                              <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                              <th className="text-left text-xs font-heading uppercase tracking-tight py-2 pr-4">
                                 Product
                               </th>
-                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                              <th className="text-right text-xs font-heading uppercase tracking-tight py-2 pr-4">
                                 Qty
                               </th>
-                              <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                              <th className="text-left text-xs font-heading uppercase tracking-tight py-2 pr-4">
                                 District
                               </th>
-                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                              <th className="text-right text-xs font-heading uppercase tracking-tight py-2 pr-4">
                                 Unit Price
                               </th>
-                              <th className="text-right text-xs font-heading uppercase tracking-wider py-2">
+                              <th className="text-right text-xs font-heading uppercase tracking-tight py-2">
                                 Total
                               </th>
                             </tr>
@@ -321,7 +321,7 @@ export default function AdminOrderDetailPage() {
                           </tbody>
                           <tfoot>
                             <tr>
-                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-wider">
+                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-tight">
                                 Subtotal
                               </td>
                               <td className="py-2 text-right text-sm font-bold">
@@ -329,7 +329,7 @@ export default function AdminOrderDetailPage() {
                               </td>
                             </tr>
                             <tr>
-                              <td colSpan={4} className="py-2 text-right text-sm uppercase tracking-wider text-[var(--color-text-muted)]">
+                              <td colSpan={4} className="py-2 text-right text-sm uppercase tracking-tight text-[var(--color-text-muted)]">
                                 Service Fee (5%)
                               </td>
                               <td className="py-2 text-right text-sm text-[var(--color-text-secondary)]">
@@ -337,7 +337,7 @@ export default function AdminOrderDetailPage() {
                               </td>
                             </tr>
                             <tr>
-                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-wider">
+                              <td colSpan={4} className="py-2 text-right text-sm font-semibold uppercase tracking-tight">
                                 Transport
                               </td>
                               <td className="py-2 text-right text-sm">

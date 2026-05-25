@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Join Farmish Orders</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#2c4f15",
+                        "surface-bright": "#f9f9f9",
+                        "primary": "#173901",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#61401c",
+                        "fresh-mist": "#F6FAF3",
+                        "muted-leaf": "#66735C",
+                        "warning-amber": "#D98A14",
+                        "error-red": "#B42318",
+                        "primary-fixed": "#c4efa3",
+                        "tertiary-fixed-dim": "#edbe8f",
+                        "on-secondary-fixed-variant": "#334e23",
+                        "background": "#f9f9f9",
+                        "on-primary-container": "#98c27b",
+                        "on-primary-fixed": "#0a2100",
+                        "on-surface": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "ink": "#11140F",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline-variant": "#c3c9b9",
+                        "success-green": "#3F7D20",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#b0d099",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#43493d",
+                        "surface-container-low": "#f3f3f4",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "primary-container": "#2d5016",
+                        "on-tertiary-container": "#dbad80",
+                        "on-secondary": "#ffffff",
+                        "harvest-cream": "#FFFAF0",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#43682b",
+                        "secondary-container": "#c6e7ae",
+                        "on-tertiary-fixed": "#2c1600",
+                        "field-border": "#E5EADF",
+                        "on-secondary-fixed": "#092100",
+                        "primary-fixed-dim": "#a8d38a",
+                        "tertiary": "#472a08",
+                        "outline": "#73796c",
+                        "secondary-fixed": "#ccecb3",
+                        "secondary": "#4a6639",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-container": "#eeeeee",
+                        "inverse-surface": "#2f3131",
+                        "inverse-primary": "#a8d38a",
+                        "on-secondary-container": "#4d683b",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#60401c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-mobile": "40px",
+                        "xxl": "48px",
+                        "gutter": "24px",
+                        "xs": "8px",
+                        "container-max": "1180px",
+                        "base": "4px",
+                        "section-desktop": "80px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "heading": ["Inter"],
+                        "caption": ["Inter"],
+                        "heading-sm": ["Inter"],
+                        "body": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "subheading": ["Inter"],
+                        "small": ["Inter"],
+                        "overline": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700" }],
+                        "heading": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.24px", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.65", "letterSpacing": "0.52px", "fontWeight": "600" }],
+                        "heading-sm": ["20px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["36px", { "lineHeight": "1.15", "letterSpacing": "-0.72px", "fontWeight": "700" }],
+                        "subheading": ["18px", { "lineHeight": "1.35", "fontWeight": "400" }],
+                        "small": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "overline": ["12px", { "lineHeight": "1.65", "letterSpacing": "0.48px", "fontWeight": "600" }],
+                        "display": ["56px", { "lineHeight": "1.1", "letterSpacing": "-1.68px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Inter", sans-serif
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.farm-shadow {
+    box-shadow: 0 10px 30px -10px rgba(23, 57, 1, 0.15)
+    }
+.bg-agricultural {
+    background-image: linear-gradient(rgba(23, 57, 1, 0.2), rgba(23, 57, 1, 0.4)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuCMjLWooHqB90ezbp5G1RjlnVuR0qg5U1BuMVPwHF9jKU4rnzuKEwycusrB7ANVCj6nEu-oTl3TSzd1h318TEJAu02eqVauGatMn5AgoAxvLuD8AKC9W1ng1k7-jmTmSJeLKOthbHLkVPBAeS4gjU21l2dMgApXlp4BQgc26jSivr0F0UDt53EnbYRUMbyjCd1itxbWIwsx0qotsY0mTKRfUk7VF7FuuR_s3yv6BqhAlCAosQQVMmzi8miubgRCyWFr6KhEKurdSiVT);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<main class="flex min-h-screen">
+<!-- Left Side: Visual Anchor -->
+<section class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-agricultural" data-alt="A lush, warm-toned close-up of vibrant Ghanaian produce including golden cocoa pods, ripe papayas, and fresh green plantains arranged artistically on a textured wooden table. The lighting is golden hour sunlight, creating long soft shadows and a tactile, premium agricultural feel. The composition is rich with organic textures and a palette of deep greens, harvest oranges, and earthy browns, evoking a sense of abundance and professional sourcing excellence.">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+<div class="relative z-10 mt-auto p-xxl text-surface-container-lowest max-w-xl">
+<div class="mb-md">
+<span class="font-overline text-overline px-sm py-1 bg-primary-fixed text-on-primary-fixed rounded-full">EST. 2024</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg mb-sm">Directly from the soil to your kitchen.</h1>
+<p class="font-subheading text-subheading opacity-90">Building the digital backbone for West Africa's agricultural supply chain, one order at a time.</p>
+</div>
+</section>
+<!-- Right Side: Sign Up Form -->
+<section class="w-full lg:w-1/2 flex items-center justify-center p-gutter bg-surface-container-lowest">
+<div class="w-full max-w-md space-y-xl">
+<!-- Brand Header -->
+<div class="text-center lg:text-left">
+<div class="flex items-center justify-center lg:justify-start gap-xs mb-md">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+<span class="font-heading text-heading text-primary">Farmish Orders</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Join Farmish Orders</h2>
+<p class="font-body text-body text-muted-leaf">Source the freshest produce directly from Ghanaian farms.</p>
+</div>
+<!-- Auth Buttons -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-field-border rounded-full font-body text-small text-on-surface hover:bg-fresh-mist transition-all active:scale-95 duration-200">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANqRCOVyFpHfj_Kfup8CpYe6P-oepZnCNMp9we7bmJdXxW8uAt-1xgtfATMCpRRdlDy2G6LOI20k9ObAwEY-c9Gytpv-JnrKopu7YMQOZpuMISXesr5c2EILRMrXu-s0GrcSKHRo-EDm2w492dfyOJIy17r0R9e-1OkH4U1_p8hmCn8TsBp1lobmYiHhjEFof7s-Q4MRpwRCi6X6M5QKZAX5wzgnpeWIU5_lXumRA18j-5p7YL7rgWk9R2Fw6MockUneAlK7zSK4Bx"/>
+                        Sign in with Google
+                    </button>
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-field-border rounded-full font-body text-small text-on-surface hover:bg-fresh-mist transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">ios</span>
+                        Sign in with Apple
+                    </button>
+</div>
+<div class="relative flex items-center py-md">
+<div class="flex-grow border-t border-field-border"></div>
+<span class="flex-shrink mx-md font-caption text-caption text-outline">or use email</span>
+<div class="flex-grow border-t border-field-border"></div>
+</div>
+<!-- Sign Up Form -->
+<form class="space-y-md" onsubmit="event.preventDefault();">
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-xs ml-1" for="email">Email Address</label>
+<input class="w-full px-md py-sm rounded-xl border border-field-border bg-surface-bright focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none font-body text-body placeholder:text-outline-variant" id="email" name="email" placeholder="name@company.com" type="email"/>
+</div>
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-xs ml-1" for="password">Password</label>
+<div class="relative">
+<input class="w-full px-md py-sm rounded-xl border border-field-border bg-surface-bright focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none font-body text-body placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-muted-leaf hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+<p class="mt-xs font-small text-small text-muted-leaf">Must be at least 8 characters.</p>
+</div>
+<button class="w-full bg-primary text-on-primary font-heading-sm text-heading-sm py-md rounded-full farm-shadow hover:bg-primary-container transition-all active:scale-95 duration-200 mt-md" type="submit">
+                        Create Account
+                    </button>
+</form>
+<!-- Footer -->
+<div class="pt-xl border-t border-field-border text-center">
+<p class="font-body text-body text-muted-leaf">
+                        Already have an account? 
+                        <a class="text-primary font-bold hover:underline transition-all" href="#">Sign in</a>
+</p>
+</div>
+<div class="text-center">
+<p class="font-caption text-caption text-outline leading-relaxed">
+                        By signing up, you agree to our 
+                        <a class="underline" href="#">Terms of Service</a> and 
+                        <a class="underline" href="#">Privacy Policy</a>.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Interactive Layer for micro-interactions -->
+<script>
+        // Simple input focus effects beyond CSS if needed
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.remove('text-primary');
+            });
+        });
+
+        // Password visibility toggle
+        const toggleBtn = document.querySelector('button .material-symbols-outlined');
+        if(toggleBtn && toggleBtn.textContent === 'visibility') {
+            const passwordInput = document.getElementById('password');
+            const btn = toggleBtn.parentElement;
+            btn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                toggleBtn.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+        }
+    </script>
+</body></html>

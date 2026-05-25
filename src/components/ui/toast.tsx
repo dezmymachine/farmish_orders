@@ -16,10 +16,10 @@ export function Toast({ message, type = "success", onClose }: ToastProps) {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg font-heading text-sm uppercase tracking-wider animate-in slide-in-from-bottom ${
+      className={`fixed bottom-4 right-4 z-50 rounded-2xl px-4 py-3 text-sm font-semibold shadow-[var(--shadow-lg)] animate-in slide-in-from-bottom ${
         type === "success"
-          ? "bg-green-600 text-white"
-          : "bg-red-600 text-white"
+          ? "bg-[var(--color-success-green)] text-white"
+          : "bg-[var(--color-error-red)] text-white"
       }`}
     >
       {message}

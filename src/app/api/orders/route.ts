@@ -11,6 +11,14 @@ interface OrderItem {
   quantity: number
 }
 
+function generateOrderNumber(date = new Date()) {
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const year = date.getFullYear()
+  const identifier = String(Math.floor(100000 + Math.random() * 900000))
+
+  return `ORD-${identifier}/${month}${year}`
+}
+
 export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient()
@@ -218,23 +226,34 @@ export async function POST(request: NextRequest) {
 
     profile = profile || { full_name: user.email?.split("@")[0] || "Customer", phone: null }
 
-    const orderNumber = `ORD-${Math.random().toString(36).substring(2, 10).toUpperCase()}`
+    let orderNumber = generateOrderNumber()
+    let order = null
+    let orderError = null
 
-    const { data: order, error: orderError } = await supabase
-      .from("orders")
-      .insert({
-        user_id: user.id,
-        order_number: orderNumber,
-        customer_name: profile?.full_name || user.email?.split("@")[0] || "Customer",
-        customer_email: user.email || "",
-        customer_phone: profile?.phone || null,
-        delivery_address,
-        delivery_notes: delivery_notes || null,
-      })
-      .select()
-      .single()
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      orderNumber = generateOrderNumber()
 
-    if (orderError) {
+      const { data, error } = await supabase
+        .from("orders")
+        .insert({
+          user_id: user.id,
+          order_number: orderNumber,
+          customer_name: profile?.full_name || user.email?.split("@")[0] || "Customer",
+          customer_email: user.email || "",
+          customer_phone: profile?.phone || null,
+          delivery_address,
+          delivery_notes: delivery_notes || null,
+        })
+        .select()
+        .single()
+
+      order = data
+      orderError = error
+
+      if (!error || error.code !== "23505") break
+    }
+
+    if (orderError || !order) {
       console.error("Order insert error:", orderError)
       return NextResponse.json({ error: "Failed to create order" }, { status: 500 })
     }

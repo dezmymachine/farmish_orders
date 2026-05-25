@@ -59,20 +59,20 @@ export function StatusUpdateModal({
         <Button
           variant="outline"
           size="sm"
-          className="font-heading uppercase tracking-wider text-xs"
+          className="font-heading uppercase tracking-tight text-xs"
         >
           Update Status
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="font-heading uppercase tracking-wider">
+          <DialogTitle className="font-heading uppercase tracking-tight">
             Update Order Status
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 pt-4">
           <div>
-            <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+            <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
               Current Status
             </label>
             <p className="text-sm text-[var(--color-text-secondary)] uppercase">
@@ -80,7 +80,7 @@ export function StatusUpdateModal({
             </p>
           </div>
           <div>
-            <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+            <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
               New Status
             </label>
             <Select
@@ -100,7 +100,7 @@ export function StatusUpdateModal({
             </Select>
           </div>
           <div>
-            <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+            <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
               Internal Note (Optional)
             </label>
             <Textarea
@@ -112,7 +112,7 @@ export function StatusUpdateModal({
           <Button
             onClick={handleUpdate}
             disabled={loading || selectedStatus === currentStatus}
-            className="w-full uppercase tracking-widest font-heading font-semibold"
+            className="w-full uppercase tracking-tight font-heading font-semibold"
           >
             {loading ? "Updating..." : "Confirm Update"}
           </Button>

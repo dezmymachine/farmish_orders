@@ -196,17 +196,17 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] p-4 md:p-8">
-      <div className="max-w-[1400px] mx-auto">
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-[1400px]">
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
           <div>
             <Link
               href={`/admin/orders/${orderId}`}
-              className="inline-block mb-2 font-heading text-sm uppercase tracking-wider text-[var(--color-accent)] hover:underline"
+              className="inline-block mb-2 font-heading text-sm uppercase tracking-tight text-[var(--color-accent)] hover:underline"
             >
               ← Back to Order
             </Link>
-            <h1 className="font-heading text-2xl font-bold uppercase tracking-wider">
+            <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)]">
               {existingQuote ? "Quote Details" : "Create Quote"}
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
@@ -246,34 +246,34 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
           </div>
         </div>
 
-        <div className="bg-white border-2 border-black p-4 md:p-6">
-          <div className="overflow-x-auto">
+        <div className="rounded-[24px] border border-[var(--color-field-border)] bg-white p-4 shadow-[var(--shadow-sm)] md:p-6">
+          <div className="overflow-x-auto rounded-[20px] border border-[var(--color-field-border)] bg-white shadow-[var(--shadow-sm)]">
             <table className="w-full border-collapse min-w-[1200px]">
               <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4 w-48">
+                <tr className="border-b border-[var(--color-field-border)] bg-[var(--color-fresh-mist)]">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4 w-48">
                     Product
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-3 pr-4 w-20">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-3 pr-4 w-20">
                     Qty
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-3 pr-4 w-24">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-3 pr-4 w-24">
                     Unit
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4 w-72">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4 w-72">
                     District (Optional)
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-3 pr-4 w-36">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-3 pr-4 w-36">
                     Unit Price
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-right py-3 w-36">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-right py-3 w-36">
                     Total
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {items.map((item, index) => (
-                  <tr key={item.order_item_id} className="border-b border-[var(--color-border-light)]">
+                  <tr key={item.order_item_id} className="border-b border-[var(--color-field-border)]">
                     <td className="py-3 pr-4 text-sm font-medium">{item.product_name}</td>
                     <td className="py-3 pr-4 text-sm text-right">{item.quantity}</td>
                     <td className="py-3 pr-4 text-sm text-right">{item.unit}</td>
@@ -329,7 +329,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
               </tbody>
               <tfoot>
                 <tr>
-                  <td colSpan={5} className="py-4 text-right font-heading text-sm font-semibold uppercase tracking-wider">
+                  <td colSpan={5} className="py-4 text-right font-heading text-sm font-semibold uppercase tracking-tight">
                     Subtotal
                   </td>
                   <td className="py-4 text-right font-heading text-base font-bold text-[var(--color-accent)]">
@@ -337,7 +337,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={5} className="py-2 text-right font-heading text-sm uppercase tracking-wider text-[var(--color-text-muted)]">
+                  <td colSpan={5} className="py-2 text-right font-heading text-sm uppercase tracking-tight text-[var(--color-text-muted)]">
                     Service Fee (5%)
                   </td>
                   <td className="py-2 text-right font-heading text-sm text-[var(--color-text-secondary)]">
@@ -345,7 +345,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={5} className="py-2 text-right font-heading text-sm font-semibold uppercase tracking-wider">
+                  <td colSpan={5} className="py-2 text-right font-heading text-sm font-semibold uppercase tracking-tight">
                     Transport
                   </td>
                   <td className="py-2">
@@ -361,7 +361,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
                   </td>
                 </tr>
                 <tr className="border-t-2 border-black">
-                  <td colSpan={5} className="py-4 text-right font-heading text-lg font-bold uppercase tracking-wider">
+                  <td colSpan={5} className="py-4 text-right font-heading text-lg font-bold uppercase tracking-tight">
                     Total
                   </td>
                   <td className="py-4 text-right font-heading text-2xl font-bold text-[var(--color-accent)]">
@@ -373,7 +373,7 @@ function QuotePageContent({ showToast: externalShowToast }: QuotePageContentProp
           </div>
 
           <div className="mt-6 max-w-md">
-            <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+            <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
               Notes (Optional)
             </label>
             <Textarea

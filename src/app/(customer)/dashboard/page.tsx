@@ -63,7 +63,7 @@ export default function DashboardPage() {
       .select("*")
       .eq("id", user.id)
       .single()
-      
+
     if (profileData) {
       setProfile(profileData as Profile)
     }
@@ -94,7 +94,7 @@ export default function DashboardPage() {
   }
 
   const getStatusBadgeClass = (status: OrderStatus) => {
-    const base = "font-heading text-xs uppercase tracking-wider px-2 py-1"
+    const base = "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold"
     switch (status) {
       case "pending":
         return `${base} bg-[var(--color-amber-light)] text-[var(--color-amber)]`
@@ -235,6 +235,12 @@ export default function DashboardPage() {
     setShowProfileModal(true)
   }
 
+  const getGreetingName = () => {
+    const fullName = profile?.full_name?.trim()
+    if (fullName) return fullName.split(/\s+/)[0]
+    return orders[0]?.customer_email || orders[0]?.customer_name || "there"
+  }
+
   const handleSaveProfile = async () => {
     setSavingProfile(true)
     try {
@@ -261,93 +267,84 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <h1 className="font-heading text-2xl lg:text-3xl font-bold uppercase tracking-wider">
-              My Orders
-            </h1>
-            <Link
-              href="/dashboard/quotes"
-              className="font-heading text-sm uppercase tracking-wider text-[var(--color-accent)] hover:underline"
-            >
-              My Quotes
-            </Link>
-          </div>
-          <div className="flex items-center gap-3">
-            {orders.length > 0 && (
-              <DropdownMenu>
-                <DropdownMenuTrigger>Export</DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => exportOrders(orders, "csv")}>
-                    Download CSV
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => exportOrders(orders, "xlsx")}>
-                    Download Excel
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => exportOrders(orders, "pdf")}>
-                    Download PDF
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-            <Link href="/order">
-              <Button
-                variant="outline"
-                className="font-heading uppercase tracking-wider text-xs lg:text-sm"
-              >
-                Place New Order
-              </Button>
-            </Link>
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-[1180px]">
+        <div className="mb-6 rounded-[28px] border border-[var(--color-field-border)] bg-white p-5 shadow-[var(--shadow-sm)] lg:p-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)] lg:text-4xl">
+                Welcome back, {getGreetingName()}
+              </h1>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              {orders.length > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger>Export</DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => exportOrders(orders, "csv")}>
+                      Download CSV
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportOrders(orders, "xlsx")}>
+                      Download Excel
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportOrders(orders, "pdf")}>
+                      Download PDF
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+              <Link href="/order">
+                <Button className="w-full text-sm sm:w-auto">
+                  New order request
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="border-b-4 border-black mb-6"></div>
-
         {/* Profile Section */}
         {!loading && profile && (
-          <div className="mb-10 bg-white border-2 border-black p-6">
+          <div className="mb-8 rounded-[24px] border border-[var(--color-field-border)] bg-white p-5 shadow-[var(--shadow-sm)] lg:p-6">
             <div className="flex justify-between items-start mb-4">
-              <h2 className="font-heading text-xl font-bold uppercase tracking-wider">
+              <h2 className="text-xl font-bold tracking-tight text-[var(--color-deep-leaf)]">
                 My Profile
               </h2>
               <Button
                 variant="outline"
                 size="sm"
-                className="font-heading uppercase tracking-wider text-xs"
+                className="text-xs"
                 onClick={handleEditProfile}
               >
                 Edit Profile
               </Button>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-[var(--color-text-muted)] font-heading uppercase tracking-wider">Full Name</p>
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]">Full Name</p>
                 <p className="font-medium">{profile.full_name || <span className="text-gray-400 italic">Not set</span>}</p>
               </div>
               <div>
-                <p className="text-xs text-[var(--color-text-muted)] font-heading uppercase tracking-wider">Organisation</p>
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]">Organisation</p>
                 <p className="font-medium">{profile.organisation || <span className="text-gray-400 italic">Not set</span>}</p>
               </div>
               <div>
-                <p className="text-xs text-[var(--color-text-muted)] font-heading uppercase tracking-wider">Phone</p>
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]">Phone</p>
                 <p className="font-medium">{profile.phone || <span className="text-gray-400 italic">Not set</span>}</p>
               </div>
               <div>
-                <p className="text-xs text-[var(--color-text-muted)] font-heading uppercase tracking-wider">Alt. Contact</p>
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]">Alt. Contact</p>
                 <p className="font-medium">{profile.contact || <span className="text-gray-400 italic">Not set</span>}</p>
               </div>
               <div className="md:col-span-2">
-                <p className="text-xs text-[var(--color-text-muted)] font-heading uppercase tracking-wider">Location</p>
+                <p className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]">Location</p>
                 <p className="font-medium">{profile.location || <span className="text-gray-400 italic">Not set</span>}</p>
               </div>
             </div>
           </div>
         )}
 
-        <h2 className="font-heading text-xl font-bold uppercase tracking-wider mb-4">
+        <h2 className="mb-4 text-2xl font-bold tracking-tight text-[var(--color-deep-leaf)]">
           Order History
         </h2>
 
@@ -358,37 +355,37 @@ export default function DashboardPage() {
             ))}
           </div>
         ) : orders.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-[var(--color-text-secondary)] mb-4">
+          <div className="rounded-[24px] border border-dashed border-[var(--color-field-border)] bg-[var(--color-fresh-mist)] py-12 text-center">
+            <p className="mb-4 text-[var(--color-muted-leaf)]">
               You haven&apos;t placed any orders yet.
             </p>
             <Link href="/order">
               <Button
-                variant="outline"
-                className="font-heading uppercase tracking-wider"
+                variant="default"
+                className=""
               >
                 Place Your First Order
               </Button>
             </Link>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-[20px] border border-[var(--color-field-border)] bg-white shadow-[var(--shadow-sm)]">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="font-heading text-xs lg:text-sm font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                <tr className="border-b border-[var(--color-field-border)] bg-[var(--color-fresh-mist)]">
+                  <th className="text-left text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] py-3 px-4">
                     Order No.
                   </th>
-                  <th className="font-heading text-xs lg:text-sm font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-left text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] py-3 px-4">
                     Date
                   </th>
-                  <th className="font-heading text-xs lg:text-sm font-semibold uppercase tracking-wider text-left py-3 pr-4 hidden sm:table-cell">
+                  <th className="text-left text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] py-3 px-4 hidden sm:table-cell">
                     Items
                   </th>
-                  <th className="font-heading text-xs lg:text-sm font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-left text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] py-3 px-4">
                     Status
                   </th>
-                  <th className="font-heading text-xs lg:text-sm font-semibold uppercase tracking-wider text-left py-3">
+                  <th className="text-left text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] py-3 px-4">
                     Actions
                   </th>
                 </tr>
@@ -397,26 +394,26 @@ export default function DashboardPage() {
                 {orders.map((order) => (
                   <tr
                     key={order.id}
-                    className="border-b border-[var(--color-border-light)]"
+                    className="border-b border-[var(--color-field-border)] hover:bg-[var(--color-fresh-mist)]"
                   >
-                    <td className="py-4 pr-4">
+                    <td className="px-4 py-4">
                       <span className="font-mono text-xs lg:text-sm">{order.order_number}</span>
                     </td>
-                    <td className="py-4 pr-4 text-xs lg:text-sm">
+                    <td className="px-4 py-4 text-sm">
                       {formatDate(order.created_at)}
                     </td>
-                    <td className="py-4 pr-4 text-xs lg:text-sm hidden sm:table-cell">
+                    <td className="hidden px-4 py-4 text-sm sm:table-cell">
                       {order.order_items?.length || 0} items
                     </td>
-                    <td className="py-4 pr-4">
+                    <td className="px-4 py-4">
                       <span className={getStatusBadgeClass(order.status)}>
                         {order.status.replace("_", " ")}
                       </span>
                     </td>
-                    <td className="py-4">
+                    <td className="px-4 py-4">
                       <div className="flex gap-2">
                         <Link href={`/dashboard/${order.id}`}>
-                          <Button variant="link" size="sm" className="p-0 font-heading uppercase tracking-wider text-xs">
+                          <Button variant="link" size="sm" className="h-auto p-0 text-xs">
                             View
                           </Button>
                         </Link>
@@ -424,13 +421,13 @@ export default function DashboardPage() {
                           <>
                             <button
                               onClick={() => handleEdit(order)}
-                              className="font-heading uppercase tracking-wider text-xs text-[var(--color-blue)] hover:underline"
+                              className="text-xs font-semibold text-[var(--color-blue)] hover:underline"
                             >
                               Edit
                             </button>
                             <button
                               onClick={() => setCancelId(order.id)}
-                              className="font-heading uppercase tracking-wider text-xs text-[var(--color-danger)] hover:underline"
+                              className="text-xs font-semibold text-[var(--color-danger)] hover:underline"
                             >
                               Cancel
                             </button>
@@ -492,7 +489,7 @@ export default function DashboardPage() {
 
           <div className="space-y-4 py-4">
             <div>
-              <h3 className="font-heading text-sm font-semibold uppercase tracking-wider mb-3">
+              <h3 className="font-heading text-sm font-semibold uppercase tracking-tight mb-3">
                 Order Items
               </h3>
               <div className="space-y-2">
@@ -532,7 +529,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="text-sm font-medium">
                         {item.custom_name}
-                        <span className="ml-1 text-[10px] text-[var(--color-accent)] uppercase tracking-wider">
+                        <span className="ml-1 text-[10px] text-[var(--color-accent)] uppercase tracking-tight">
                           (custom)
                         </span>
                       </p>
@@ -557,7 +554,7 @@ export default function DashboardPage() {
             </div>
 
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Delivery Address
               </label>
               <Textarea
@@ -569,7 +566,7 @@ export default function DashboardPage() {
             </div>
 
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Notes (Optional)
               </label>
               <Textarea
@@ -603,7 +600,7 @@ export default function DashboardPage() {
 
           <div className="space-y-4 py-4">
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Full Name
               </label>
               <Input
@@ -613,7 +610,7 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Organisation
               </label>
               <Input
@@ -623,7 +620,7 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Phone Number
               </label>
               <Input
@@ -633,7 +630,7 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Alternate Contact (Email/Phone)
               </label>
               <Input
@@ -643,7 +640,7 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-1">
+              <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-1">
                 Location / Address
               </label>
               <Textarea

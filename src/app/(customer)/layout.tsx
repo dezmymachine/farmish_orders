@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { CustomerNav } from "@/components/CustomerNav"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 export default async function CustomerLayout({
   children,
@@ -17,11 +18,11 @@ export default async function CustomerLayout({
   }
 
   return (
-    <div className="min-h-screen flex">
-      <CustomerNav userEmail={user.email || ""} />
-      <main className="flex-1 lg:ml-64">
-        {children}
-      </main>
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen bg-[var(--color-white-canvas)]">
+        <CustomerNav userEmail={user.email || ""} />
+        <SidebarInset>{children}</SidebarInset>
+      </div>
+    </SidebarProvider>
   )
 }

@@ -5,6 +5,10 @@ import { QuoteEmail } from "@/lib/resend/templates/Quote"
 import jsPDF from "jspdf"
 import autoTable from "jspdf-autotable"
 
+function safeFileName(value: string) {
+  return value.replace(/[^a-z0-9_-]+/gi, "_").replace(/^_+|_+$/g, "")
+}
+
 function generateQuotePDF(
   items: any[],
   totalAmount: number,
@@ -183,7 +187,7 @@ export async function POST(
         html: emailHtml,
         attachments: [
           {
-            filename: `quote_${existingOrder.order_number}.pdf`,
+            filename: `quote_${safeFileName(existingOrder.order_number)}.pdf`,
             content: pdfBuffer.toString("base64"),
           },
         ],

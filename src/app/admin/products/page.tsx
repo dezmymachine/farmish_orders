@@ -130,10 +130,10 @@ export default function AdminProductsPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-60px)] bg-[var(--color-bg)] p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-[1180px]">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="font-heading text-2xl font-bold uppercase tracking-wider">
+          <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)]">
             Products
           </h1>
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -141,20 +141,20 @@ export default function AdminProductsPage() {
               <Button
                 onClick={() => handleOpenDialog()}
                 variant="outline"
-                className="font-heading uppercase tracking-wider"
+                className="font-heading uppercase tracking-tight"
               >
                 Add Product
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="font-heading uppercase tracking-wider">
+                <DialogTitle className="font-heading uppercase tracking-tight">
                   {editingProduct ? "Edit Product" : "Add Product"}
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div>
-                  <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+                  <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
                     Name
                   </label>
                   <Input
@@ -164,7 +164,7 @@ export default function AdminProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+                  <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
                     Category
                   </label>
                   <select
@@ -181,7 +181,7 @@ export default function AdminProductsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="font-heading text-sm font-semibold uppercase tracking-wider block mb-2">
+                  <label className="font-heading text-sm font-semibold uppercase tracking-tight block mb-2">
                     Unit
                   </label>
                   <select
@@ -199,7 +199,7 @@ export default function AdminProductsPage() {
                 <Button
                   onClick={handleSave}
                   disabled={!formData.name || !formData.category}
-                  className="w-full uppercase tracking-widest font-heading font-semibold"
+                  className="w-full uppercase tracking-tight font-heading font-semibold"
                 >
                   {editingProduct ? "Save Changes" : "Add Product"}
                 </Button>
@@ -208,7 +208,7 @@ export default function AdminProductsPage() {
           </Dialog>
         </div>
 
-        <div className="border-b-4 border-black mb-6"></div>
+        <div className="border-b border-[var(--color-field-border)] mb-6"></div>
 
         {loading ? (
           <div className="space-y-2">
@@ -221,23 +221,23 @@ export default function AdminProductsPage() {
             <p className="text-[var(--color-text-secondary)]">No products found</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-[20px] border border-[var(--color-field-border)] bg-white shadow-[var(--shadow-sm)]">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                <tr className="border-b border-[var(--color-field-border)] bg-[var(--color-fresh-mist)]">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Name
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Category
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Unit
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3 pr-4">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3 pr-4">
                     Available
                   </th>
-                  <th className="font-heading text-xs font-semibold uppercase tracking-wider text-left py-3">
+                  <th className="text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)] text-left py-3">
                     Actions
                   </th>
                 </tr>
@@ -246,7 +246,7 @@ export default function AdminProductsPage() {
                 {products.map((product) => (
                   <tr
                     key={product.id}
-                    className="border-b border-[var(--color-border-light)]"
+                    className="border-b border-[var(--color-field-border)]"
                   >
                     <td className="py-3 pr-4 text-sm">{product.name}</td>
                     <td className="py-3 pr-4 text-sm">{product.category}</td>
@@ -269,7 +269,7 @@ export default function AdminProductsPage() {
                         variant="link"
                         size="sm"
                         onClick={() => handleOpenDialog(product)}
-                        className="p-0 font-heading uppercase tracking-wider text-xs"
+                        className="p-0 font-heading uppercase tracking-tight text-xs"
                       >
                         Edit
                       </Button>

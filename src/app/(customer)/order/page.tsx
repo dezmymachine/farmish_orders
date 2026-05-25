@@ -88,22 +88,22 @@ function OrderContent() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)] p-6">
-        <div className="max-w-md text-center">
-          <div className="bg-[var(--color-surface)] border border-[var(--color-border-light)] p-8">
-            <h1 className="font-heading text-2xl font-bold uppercase tracking-wider mb-4">
-              Order Received
-            </h1>
-            <p className="font-mono text-xl mb-4">{orderNumber}</p>
-            <p className="text-[var(--color-text-secondary)] mb-6">
-              Your order has been received. We will review it and send you a quote
-              shortly.
+      <div className="min-h-screen bg-white px-5 py-12 lg:px-8">
+        <div className="mx-auto flex min-h-[70vh] max-w-lg items-center justify-center text-center">
+          <div className="rounded-[28px] border border-[var(--color-field-border)] bg-white p-7 shadow-[var(--shadow-lg)]">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-fresh-mist)] text-[var(--color-farm-green)]">
+              ✓
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)]">Request received</h1>
+            <p className="mt-3 font-mono text-lg text-[var(--color-farm-green)]">{orderNumber}</p>
+            <p className="mt-4 text-[var(--color-muted-leaf)]">
+              Your produce request has been received. Farmish will review availability and send you a clear quote before any payment.
             </p>
             <button
               onClick={() => router.push("/dashboard")}
-              className="inline-flex items-center justify-center border-2 border-black bg-black text-white px-6 py-2 font-heading uppercase tracking-wider text-sm font-semibold hover:bg-[var(--color-text-primary)] transition-colors"
+              className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[var(--color-farm-green)] px-6 text-sm font-semibold text-white shadow-[var(--shadow-md)] hover:bg-[var(--color-deep-leaf)]"
             >
-              View My Orders
+              View my orders
             </button>
           </div>
         </div>
@@ -112,24 +112,25 @@ function OrderContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-3">
-            <h1 className="font-heading text-2xl font-bold uppercase tracking-wider mb-6">
-              Place Your Order
-            </h1>
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-[1180px]">
+        <div className="mb-6 rounded-[28px] border border-[var(--color-field-border)] bg-white p-5 shadow-[var(--shadow-sm)] lg:p-6">
+          <h1 className="text-3xl font-bold tracking-tight text-[var(--color-deep-leaf)] lg:text-4xl">Place your order</h1>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+          <div className="lg:col-span-3 xl:col-span-3">
             {loading ? (
               <div className="space-y-4">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Skeleton key={i} className="h-12 w-full" />
+                  <Skeleton key={i} className="h-28 w-full rounded-[20px]" />
                 ))}
               </div>
             ) : (
               <ProductGrid products={products} cart={cart} setCart={setCart} />
             )}
           </div>
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-2">
             <CartSidebar cart={cart} setCart={setCart} onSubmit={handleSubmit} isSubmitting={submitting} />
           </div>
         </div>
@@ -152,7 +153,7 @@ function OrderContent() {
 
 export default function OrderPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[var(--color-bg)] p-6">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-white p-6">Loading...</div>}>
       <OrderContent />
     </Suspense>
   )

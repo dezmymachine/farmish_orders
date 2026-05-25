@@ -87,43 +87,43 @@ export default function QuotesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[var(--color-bg)] p-6">
-        <div className="max-w-4xl mx-auto">Loading...</div>
+      <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+        <div className="mx-auto max-w-4xl">Loading...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white px-4 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-4xl">
         <Link
           href="/dashboard"
-          className="inline-block mb-4 font-heading text-sm uppercase tracking-wider text-[var(--color-accent)] hover:underline"
+          className="mb-4 inline-block text-sm font-semibold text-[var(--color-farm-green)] hover:underline"
         >
-          ← Back to Orders
+          Back to orders
         </Link>
 
-        <h1 className="font-heading text-2xl font-bold uppercase tracking-wider mb-6">
+        <h1 className="font-heading text-2xl font-bold uppercase tracking-tight mb-6">
           My Quotes
         </h1>
 
         {quotes.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-[var(--color-text-secondary)]">No quotes found</p>
+            <p className="text-[var(--color-muted-leaf)]">No quotes found</p>
           </div>
         ) : (
           <div className="space-y-4">
             {quotes.map((quote) => (
               <div
                 key={quote.id}
-                className="bg-white border-2 border-black p-4"
+                className="rounded-[24px] border border-[var(--color-field-border)] bg-white p-5 shadow-[var(--shadow-sm)]"
               >
                 <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                   <div>
-                    <span className="font-heading text-sm uppercase tracking-wider">
+                    <span className="font-heading text-sm uppercase tracking-tight">
                       Quote {quote.id.slice(0, 8)}
                     </span>
-                    <span className="ml-3 text-sm text-[var(--color-text-muted)]">
+                    <span className="ml-3 text-sm text-[var(--color-muted-leaf)]">
                       Order: {orderMap[quote.order_id] || quote.order_id.slice(0, 8)}
                     </span>
                   </div>
@@ -152,28 +152,28 @@ export default function QuotesPage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-[var(--color-text-muted)] mb-3">
+                <p className="text-xs text-[var(--color-muted-leaf)] mb-3">
                   Created: {formatDate(quote.created_at)}
                 </p>
 
                 {quote.quote_items && quote.quote_items.length > 0 && (
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
+                    <table className="w-full border-collapse rounded-[20px] bg-white">
                       <thead>
                         <tr className="border-b border-gray-300">
-                          <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                          <th className="text-left text-xs font-heading uppercase tracking-tight py-2 pr-4">
                             Product
                           </th>
-                          <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                          <th className="text-right text-xs font-heading uppercase tracking-tight py-2 pr-4">
                             Qty
                           </th>
-                          <th className="text-left text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                          <th className="text-left text-xs font-heading uppercase tracking-tight py-2 pr-4">
                             District
                           </th>
-                          <th className="text-right text-xs font-heading uppercase tracking-wider py-2 pr-4">
+                          <th className="text-right text-xs font-heading uppercase tracking-tight py-2 pr-4">
                             Unit Price
                           </th>
-                          <th className="text-right text-xs font-heading uppercase tracking-wider py-2">
+                          <th className="text-right text-xs font-heading uppercase tracking-tight py-2">
                             Total
                           </th>
                         </tr>

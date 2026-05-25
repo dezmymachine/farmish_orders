@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-barlow-condensed",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -25,7 +19,7 @@ export const metadata: Metadata = {
     default: "Farmish — Fresh Produce Directly From Ghanaian Farms",
     template: "%s | Farmish",
   },
-  description: "Order fresh vegetables, grains, spices, and more directly from Ghanaian farms. Get quotes fast — simple and transparent.",
+  description: "Order fresh vegetables, grains, spices, and other farm produce directly from trusted Ghanaian farms. Submit your request, receive a clear quote, and confirm when ready.",
 };
 
 export default function RootLayout({
@@ -36,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${barlowCondensed.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

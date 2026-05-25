@@ -70,22 +70,22 @@ export function CustomItemForm({ onAdd }: CustomItemFormProps) {
       <Button
         variant="outline"
         onClick={() => setOpen(true)}
-        className="w-full uppercase tracking-widest font-heading font-semibold text-xs border-dashed"
+        className="w-full border-dashed text-sm"
       >
-        + Add Custom Item
+        Add custom item
       </Button>
     )
   }
 
   return (
-    <div className="space-y-3 p-3 border-2 border-dashed border-[var(--color-border-light)]">
+    <div className="space-y-3 rounded-[20px] border border-dashed border-[var(--color-field-border)] bg-white p-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-heading text-sm font-semibold uppercase tracking-wider">
+        <h3 className="text-sm font-semibold text-[var(--color-deep-leaf)]">
           Custom Item
         </h3>
         <button
           onClick={() => setOpen(false)}
-          className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] text-lg leading-none"
+          className="text-[var(--color-muted-leaf)] hover:text-[var(--color-ink)] text-lg leading-none"
         >
           ×
         </button>
@@ -93,18 +93,18 @@ export function CustomItemForm({ onAdd }: CustomItemFormProps) {
 
       <div className="space-y-2">
         <div>
-          <Label className="font-heading text-xs uppercase tracking-wider">Item Name</Label>
+          <Label className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-secondary)]">Item Name</Label>
           <Input
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
             placeholder="e.g. Yam, Rice, Pepper..."
-            className="h-9"
+            className="h-10"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <Label className="font-heading text-xs uppercase tracking-wider">Quantity</Label>
+            <Label className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-secondary)]">Quantity</Label>
             <Input
               type="number"
               min="0"
@@ -112,13 +112,13 @@ export function CustomItemForm({ onAdd }: CustomItemFormProps) {
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               placeholder="0"
-              className="h-9"
+              className="h-10"
             />
           </div>
           <div>
-            <Label className="font-heading text-xs uppercase tracking-wider">Unit</Label>
+            <Label className="text-xs font-bold uppercase tracking-tight text-[var(--color-text-secondary)]">Unit</Label>
             <Select value={unitMode} onValueChange={(v) => setUnitMode(v as "preset" | "custom")}>
-              <SelectTrigger className="h-9">
+              <SelectTrigger className="h-10">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -131,7 +131,7 @@ export function CustomItemForm({ onAdd }: CustomItemFormProps) {
 
         {unitMode === "preset" && (
           <Select value={selectedUnit} onValueChange={setSelectedUnit}>
-            <SelectTrigger className="h-9">
+            <SelectTrigger className="h-10">
               <SelectValue placeholder="Choose unit..." />
             </SelectTrigger>
             <SelectContent>
@@ -147,16 +147,16 @@ export function CustomItemForm({ onAdd }: CustomItemFormProps) {
             value={customUnit}
             onChange={(e) => setCustomUnit(e.target.value)}
             placeholder="e.g. Heap, Bowl, Plate..."
-            className="h-9"
+            className="h-10"
           />
         )}
 
         <Button
           onClick={handleAdd}
           disabled={!itemName.trim() || !quantity || parseFloat(quantity) <= 0 || !(unitMode === "preset" ? selectedUnit : customUnit)}
-          className="w-full uppercase tracking-widest font-heading font-semibold text-xs"
+          className="w-full text-sm"
         >
-          Add to Order
+          Add to request
         </Button>
       </div>
     </div>

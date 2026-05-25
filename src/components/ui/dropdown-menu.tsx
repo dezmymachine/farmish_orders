@@ -3,6 +3,8 @@
 import * as React from "react"
 import { ChevronDown, Download } from "lucide-react"
 
+import { cn } from "@/lib/utils"
+
 interface DropdownContextValue {
   open: boolean
   setOpen: (open: boolean) => void
@@ -47,19 +49,24 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
 
 interface DropdownMenuTriggerProps {
   children?: React.ReactNode
+  className?: string
 }
 
-export function DropdownMenuTrigger({ children }: DropdownMenuTriggerProps) {
+export function DropdownMenuTrigger({ children, className }: DropdownMenuTriggerProps) {
   const { open, setOpen } = useDropdownContext()
 
   return (
     <button
+      type="button"
       onClick={() => setOpen(!open)}
-      className="flex items-center gap-1 px-3 py-2 border-2 border-black bg-white font-heading text-xs uppercase tracking-wider hover:bg-gray-50"
+      className={cn(
+        "inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-field-border)] bg-white px-4 text-sm font-semibold text-[var(--color-farm-green)] shadow-[var(--shadow-sm)] transition-all hover:bg-[var(--color-fresh-mist)] focus-visible:ring-4 focus-visible:ring-ring/15",
+        className
+      )}
     >
-      <Download className="w-4 h-4" />
+      <Download className="h-4 w-4" />
       {children || "Export"}
-      <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
+      <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
     </button>
   )
 }
@@ -84,7 +91,11 @@ export function DropdownMenuContent({
 
   return (
     <div
-      className={`absolute ${alignClass} mt-1 w-36 bg-white border-2 border-black shadow-lg z-50 ${className || ""}`}
+      className={cn(
+        "absolute z-50 mt-2 min-w-44 overflow-hidden rounded-2xl border border-[var(--color-field-border)] bg-white p-1.5 text-sm shadow-[var(--shadow-lg)]",
+        alignClass,
+        className
+      )}
       onClick={(e) => e.stopPropagation()}
     >
       {React.Children.map(children, (child) =>
@@ -108,15 +119,15 @@ interface DropdownMenuItemProps {
   className?: string
 }
 
-export function DropdownMenuItem({
-  children,
-  onClick,
-  className,
-}: DropdownMenuItemProps) {
+export function DropdownMenuItem({ children, onClick, className }: DropdownMenuItemProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 font-medium ${className || ""}`}
+      className={cn(
+        "flex w-full items-center rounded-xl px-3 py-2.5 text-left text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-fresh-mist)] hover:text-[var(--color-farm-green)] focus-visible:bg-[var(--color-fresh-mist)]",
+        className
+      )}
     >
       {children}
     </button>
@@ -130,9 +141,7 @@ interface DropdownMenuLabelProps {
 
 export function DropdownMenuLabel({ children, className }: DropdownMenuLabelProps) {
   return (
-    <div
-      className={`px-4 py-2 text-xs font-heading uppercase tracking-wider text-gray-500 ${className || ""}`}
-    >
+    <div className={cn("px-3 py-2 text-xs font-bold uppercase tracking-tight text-[var(--color-muted-leaf)]", className)}>
       {children}
     </div>
   )
@@ -141,5 +150,5 @@ export function DropdownMenuLabel({ children, className }: DropdownMenuLabelProp
 interface DropdownMenuSeparatorProps {}
 
 export function DropdownMenuSeparator({}: DropdownMenuSeparatorProps) {
-  return <div className="border-t border-gray-200 my-1" />
+  return <div className="my-1 h-px bg-[var(--color-field-border)]" />
 }

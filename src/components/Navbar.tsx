@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { Menu, X } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import type { User } from "@supabase/supabase-js"
 
@@ -40,82 +41,93 @@ export default function Navbar() {
   }
 
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0F0F0F] h-[48px] md:h-[56px]">
-        <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-4 md:px-6">
-          <Link href="/">
-            <Image src="/logo.png" alt="Farmish" width={40} height={40} className="shrink-0 w-8 h-8 md:w-10 md:h-10" />
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-[var(--color-field-border)] bg-white/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 md:px-8">
+        <Link href="/" aria-label="Farmish home" className="flex items-center">
+          <Image src="/logo.png" alt="Farmish" width={250} height={150} className="h-10 w-auto sm:h-11" priority />
+        </Link>
 
-          <div className="hidden md:flex items-center gap-6">
-            {user ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="font-heading font-semibold uppercase tracking-wider text-[13px] text-white hover:text-[#EBF0E4] transition-colors duration-150"
-                >
-                  MY ORDERS
-                </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="font-heading font-semibold uppercase tracking-wider text-[13px] text-white border border-white bg-transparent px-5 py-1.5 transition-colors duration-150 hover:bg-white hover:text-[#0F0F0F] rounded-none"
-                >
-                  SIGN OUT
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className="font-heading font-semibold uppercase tracking-wider text-[13px] text-white border border-white bg-transparent px-5 py-1.5 transition-colors duration-150 hover:bg-white hover:text-[#0F0F0F] rounded-none"
-              >
-                SIGN IN
-              </Link>
-            )}
-          </div>
+        <nav className="hidden items-center gap-8 md:flex">
+          <a href="/#how-it-works" className="text-sm font-medium text-[var(--color-muted-leaf)] hover:text-[var(--color-farm-green)]">
+            How it works
+          </a>
+          <a href="/#produce" className="text-sm font-medium text-[var(--color-muted-leaf)] hover:text-[var(--color-farm-green)]">
+            Produce
+          </a>
+          <a href="/#faq" className="text-sm font-medium text-[var(--color-muted-leaf)] hover:text-[var(--color-farm-green)]">
+            FAQ
+          </a>
+        </nav>
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8"
-          >
-            <span className="block w-5 h-0.5 bg-white mb-1"></span>
-            <span className="block w-5 h-0.5 bg-white mb-1"></span>
-            <span className="block w-5 h-0.5 bg-white"></span>
-          </button>
-        </div>
-      </nav>
-
-      {menuOpen && (
-        <div className="fixed top-[48px] left-0 right-0 z-40 bg-[#0F0F0F] md:hidden">
+        <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <>
-              <Link
-                href="/dashboard"
-                onClick={() => setMenuOpen(false)}
-                className="block px-6 py-3 font-heading font-semibold uppercase tracking-wider text-[13px] text-white border-b border-[#2A2A2A] hover:text-[#EBF0E4] transition-colors duration-150"
-              >
-                MY ORDERS
+              <Link href="/dashboard" className="rounded-full px-4 py-2 text-sm font-semibold text-[var(--color-farm-green)] hover:bg-[var(--color-fresh-mist)]">
+                My orders
               </Link>
               <button
-                onClick={() => {
-                  handleSignOut()
-                  setMenuOpen(false)
-                }}
-                className="block w-full text-left px-6 py-3 font-heading font-semibold uppercase tracking-wider text-[13px] text-white border-b border-[#2A2A2A] hover:text-[#EBF0E4] transition-colors duration-150"
+                onClick={handleSignOut}
+                className="rounded-full border border-[var(--color-field-border)] px-4 py-2 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]"
               >
-                SIGN OUT
+                Sign out
               </button>
             </>
           ) : (
-            <Link
-              href="/login"
-              onClick={() => setMenuOpen(false)}
-              className="block px-6 py-3 font-heading font-semibold uppercase tracking-wider text-[13px] text-white border-b border-[#2A2A2A] hover:text-[#EBF0E4] transition-colors duration-150"
-            >
-              SIGN IN
-            </Link>
+            <>
+              <Link href="/login" className="rounded-full px-4 py-2 text-sm font-semibold text-[var(--color-farm-green)] hover:bg-[var(--color-fresh-mist)]">
+                Sign in
+              </Link>
+              <Link href="/order" className="rounded-full bg-[var(--color-farm-green)] px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-md)] hover:bg-[var(--color-deep-leaf)]">
+                Place an order
+              </Link>
+            </>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-field-border)] text-[var(--color-farm-green)] md:hidden"
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={19} /> : <Menu size={19} />}
+        </button>
+      </div>
+
+      {menuOpen && (
+        <div className="border-t border-[var(--color-field-border)] bg-white px-5 py-4 md:hidden">
+          <div className="space-y-1">
+            <a href="/#how-it-works" onClick={() => setMenuOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]">
+              How it works
+            </a>
+            <a href="/#produce" onClick={() => setMenuOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]">
+              Produce
+            </a>
+            <a href="/#faq" onClick={() => setMenuOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]">
+              FAQ
+            </a>
+            {user ? (
+              <>
+                <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]">
+                  My orders
+                </Link>
+                <button onClick={() => { handleSignOut(); setMenuOpen(false) }} className="block w-full rounded-xl px-3 py-3 text-left text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-fresh-mist)]">
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <Link href="/login" onClick={() => setMenuOpen(false)} className="rounded-full border border-[var(--color-field-border)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-farm-green)]">
+                  Sign in
+                </Link>
+                <Link href="/order" onClick={() => setMenuOpen(false)} className="rounded-full bg-[var(--color-farm-green)] px-4 py-3 text-center text-sm font-semibold text-white">
+                  Order
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
       )}
-    </>
+    </header>
   )
 }
